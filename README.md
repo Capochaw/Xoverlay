@@ -2,6 +2,10 @@
 Display an image when the cursor is in a specific place
 
 ![demo](https://github.com/Capochaw/Xoverlay/blob/main/demo.gif)
+
+## Usage
+```overlay "/path/to/img"```
+
 ## Acknowledgements
 
 This project uses stb_image by Sean Barrett:
