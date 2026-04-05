@@ -1,6 +1,7 @@
 # Xoverlay
 Display an image when the cursor is in a specific place
 
+![demo](https://github.com/Capochaw/Xoverlay/blob/main/demo.gif)
 ## Acknowledgements
 
 This project uses stb_image by Sean Barrett:
