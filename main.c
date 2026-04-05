@@ -4,7 +4,6 @@
 #include <X11/Xlib.h>
 #include <X11/Xutil.h>
 #include <X11/extensions/Xrender.h>
-#include <X11/extensions/Xfixes.h>
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -21,9 +20,14 @@ void rgba_to_bgra(unsigned char *data, int w, int h) {
     }
 }
 
-int main() {
+int main(int argc,char* argv[]) {
     Display *dpy = XOpenDisplay(NULL);
     if (!dpy) return 1;
+
+    if(argc == 1){
+        printf("ERROR: image path not loaded.\n");
+        return 1;
+    }
 
     int screen = DefaultScreen(dpy);
     Window root = RootWindow(dpy, screen);
@@ -32,7 +36,7 @@ int main() {
     unsigned char *img = NULL;
     int w = 0, h = 0, ch = 0;
     while(img == NULL){
-        img = stbi_load("/tmp/kunst.jpg", &w, &h, &ch, 4);
+        img = stbi_load(argv[1], &w, &h, &ch, 4);
         if (!img) {
             printf("Error recargando imagen\n");
             continue;
@@ -77,15 +81,6 @@ int main() {
     time_t last_reload = 0;
     int reload_interval = 1;
 
-    int xfixes_event_base, xfixes_error_base;
-
-    if (!XFixesQueryExtension(dpy, &xfixes_event_base, &xfixes_error_base)) {
-        printf("XFixes no disponible\n");
-        return 1;
-    }
-
-// Suscribirse a eventos de cursor
-XFixesSelectCursorInput(dpy, root, XFixesDisplayCursorNotifyMask);
 
     while (1) {
         // ===== detectar mouse =====
@@ -113,7 +108,7 @@ XFixesSelectCursorInput(dpy, root, XFixesDisplayCursorNotifyMask);
                 img = NULL;
             }
 
-            img = stbi_load("/tmp/kunst.jpg", &w, &h, &ch, 4);
+            img = stbi_load(argv[1], &w, &h, &ch, 4);
             if (!img) {
                 printf("Error recargando imagen\n");
                 continue;
