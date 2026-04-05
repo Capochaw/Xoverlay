@@ -7,3 +7,8 @@ This project uses stb_image by Sean Barrett:
 https://github.com/nothings/stb
 
 stb_image is a public domain / MIT-like licensed library.
+
+## Build
+```
+gcc main.c -o Xoverlay -lX11 -lXrender -lm
+```
