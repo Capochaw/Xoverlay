@@ -43,8 +43,17 @@ int main(int argc,char* argv[]) {
         }
         rgba_to_bgra(img, w, h);
     }
+
     int rx = 1414, ry = 27, rw = 300, rh = 300;
     int vrx = 1620, vry = 0, vrw = 300, vrh = 22;
+    if(argc == 3){
+        if(atoi(argv[2]) == 0){
+            vry = 0;
+        } else {
+            printf("%d\n",atoi(argv[2]));
+            vry = 1058, ry = 553;
+        }
+    }
 
     // Visual con alpha
     XVisualInfo vinfo;
